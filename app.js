@@ -224,6 +224,7 @@
     els.boardUrl.textContent = url.replace('https://', '');
     els.jq.value = '';
     els.remote.checked = false;
+    delete els.jobStatus.dataset.base;
     els.jobs.replaceChildren();
     els.more.hidden = true;
     els.inputJson.hidden = true;
@@ -258,6 +259,7 @@
   }
 
   function renderJobs() {
+    if (!allJobs.length) return;
     const list = filteredJobs();
     const base = els.jobStatus.dataset.base || '';
     const filtering = els.jq.value.trim() || els.remote.checked;

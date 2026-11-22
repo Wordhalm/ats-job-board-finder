@@ -1,12 +1,12 @@
 # ATS Job Board Finder
 
-Find which applicant tracking system a company hires on, open its public job board, and list its open roles live.
+Find which applicant tracking system a company hires on and list its open roles live.
 
 **Use it:** https://wordhalm.github.io/ats-job-board-finder/
 
 - 25,787 companies indexed: 7,363 on Greenhouse, 2,377 on Lever, 4,171 on Ashby, 11,876 on SmartRecruiters.
 - Paste a company name, a board slug or a job board URL (`jobs.lever.co/…`, `jobs.ashbyhq.com/…`, `job-boards.greenhouse.io/…`, `careers.smartrecruiters.com/…`).
-- Open roles are read from each ATS's public job board API, directly from your browser. No backend, no cookies, no analytics.
+- Open roles are read from each ATS's public job board API, directly from your browser. The page has no backend and sets no cookies.
 - Each company has a shareable URL, for example `https://wordhalm.github.io/ats-job-board-finder/#/greenhouse/stripe`.
 
 ## Download the index
@@ -22,7 +22,7 @@ Find which applicant tracking system a company hires on, open its public job boa
 
 ## Many companies, every day
 
-This page reads one board at a time. To pull roles from hundreds of boards in one run, filter them by keyword, location or remote, and get only the roles opened since the previous run, use [Career Site Jobs Search](https://apify.com/clearstack-data/career-site-jobs-search) on Apify. Ready-made n8n workflows (daily hiring signals to Slack, and others) are in [clearstack-data-automation-templates](https://github.com/Wordhalm/clearstack-data-automation-templates).
+This page reads one board at a time. To pull roles from hundreds of boards in one run and keep only those opened since the previous run, use [Career Site Jobs Search](https://apify.com/clearstack-data/career-site-jobs-search) on Apify. Ready-made n8n workflows (daily hiring signals to Slack, and others) are in [clearstack-data-automation-templates](https://github.com/Wordhalm/clearstack-data-automation-templates).
 
 ## Run locally
 
