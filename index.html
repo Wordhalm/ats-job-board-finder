@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATS Job Board Finder: which ATS does a company use?</title>
+<meta name="description" content="Search 25,787 companies hiring on Greenhouse, Lever, Ashby and SmartRecruiters. See which ATS a company uses, open its public job board and list its open roles live. Free, no sign-up.">
+<link rel="canonical" href="https://wordhalm.github.io/ats-job-board-finder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ATS Job Board Finder">
+<meta property="og:description" content="Which ATS does a company use? Search 25,787 Greenhouse, Lever, Ashby and SmartRecruiters job boards and list open roles live.">
+<meta property="og:url" content="https://wordhalm.github.io/ats-job-board-finder/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f5f8b'/%3E%3Ccircle cx='14' cy='14' r='6' fill='none' stroke='white' stroke-width='3'/%3E%3Cpath d='M18.5 18.5l6 6' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ATS Job Board Finder",
+  "url": "https://wordhalm.github.io/ats-job-board-finder/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Search 25,787 companies hiring on Greenhouse, Lever, Ashby and SmartRecruiters and list their open roles live from the public job board APIs.",
+  "creator": { "@type": "Organization", "name": "ClearStack Data", "url": "https://apify.com/clearstack-data" }
+}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="./">ATS Job Board Finder</a>
+    <nav class="top-links">
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/Wordhalm/ats-job-board-finder">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1>Which ATS does this company hire on?</h1>
+    <p class="lede">Type a company name. You get its applicant tracking system, a link to its public job board, and the roles it has open right now. <span id="index-count">25,787</span> companies on Greenhouse, Lever, Ashby and SmartRecruiters.</p>
+  </section>
+
+  <section class="search" aria-label="Company search">
+    <label class="sr-only" for="q">Company name, board slug or job board URL</label>
+    <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Stripe, Notion, Bosch, jobs.lever.co/…" autofocus>
+    <div class="filters" role="group" aria-label="ATS filter">
+      <button type="button" class="chip on" data-ats="all">All</button>
+      <button type="button" class="chip" data-ats="greenhouse">Greenhouse</button>
+      <button type="button" class="chip" data-ats="lever">Lever</button>
+      <button type="button" class="chip" data-ats="ashby">Ashby</button>
+      <button type="button" class="chip" data-ats="smartrecruiters">SmartRecruiters</button>
+    </div>
+    <p id="status" class="status" aria-live="polite">Loading the company index…</p>
+    <ul id="results" class="results"></ul>
+  </section>
+
+  <section id="board" class="board" hidden>
+    <div class="board-head">
+      <div>
+        <p class="crumb"><a href="#" id="back">← Back to search</a></p>
+        <h2 id="board-name"></h2>
+        <p class="board-meta"><span id="board-ats" class="tag"></span> <a id="board-url" href="#" rel="noopener" target="_blank"></a></p>
+        <p class="board-meta"><button type="button" class="linkish" id="to-cta">Get this board's new roles every morning →</button></p>
+      </div>
+    </div>
+    <div class="job-tools">
+      <label class="sr-only" for="jq">Filter roles</label>
+      <input id="jq" type="search" placeholder="Filter by title, team or location">
+      <label class="check"><input id="remote" type="checkbox"> Remote only</label>
+    </div>
+    <p id="job-status" class="status" aria-live="polite"></p>
+    <ol id="jobs" class="jobs"></ol>
+    <button id="more" type="button" class="more" hidden>Show more</button>
+
+    <aside class="cta" id="cta">
+      <h3>Tracking more than one company?</h3>
+      <p>This page reads one board at a time. <strong>Career Site Jobs Search</strong> on Apify runs the same lookup across hundreds of boards, filters by keyword, location and remote, and exports to JSON, CSV or Excel. In monitor mode it returns only the roles opened since the previous run, so a daily schedule gives you a feed of new openings.</p>
+      <p class="price">Pay per result: $1.50 per 1,000 jobs plus $0.002 per run. Apify's free plan includes monthly credit.</p>
+      <div class="cta-actions">
+        <a class="btn" id="cta-link" href="https://apify.com/clearstack-data/career-site-jobs-search" rel="noopener" target="_blank">Open the Actor on Apify</a>
+        <button class="btn ghost" id="copy-input" type="button">Copy input for this company</button>
+      </div>
+      <pre id="input-json" class="input-json" hidden></pre>
+    </aside>
+  </section>
+
+  <section class="popular" id="popular-section">
+    <h2>Popular boards</h2>
+    <ul class="popular-list" id="popular"></ul>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>FAQ</h2>
+    <details>
+      <summary>How can I tell which ATS a company uses?</summary>
+      <p>Look at the address of its job listings. Greenhouse boards live on boards.greenhouse.io or job-boards.greenhouse.io, Lever on jobs.lever.co, Ashby on jobs.ashbyhq.com and SmartRecruiters on jobs.smartrecruiters.com. Many companies hide this behind their own careers page; this index maps 25,787 of them to the underlying board.</p>
+    </details>
+    <details>
+      <summary>Where do the open roles come from?</summary>
+      <p>Your browser calls the public job board API of each ATS directly when you open a company. Nothing goes through a server of ours, so the list is as current as the company's own board.</p>
+    </details>
+    <details>
+      <summary>Where does the company list come from?</summary>
+      <p>From the open-source <a href="https://github.com/kalil0321/ats-scrapers">kalil0321/ats-scrapers</a> project (MIT License). It is a snapshot: a company that has changed ATS or closed its board will show zero roles.</p>
+    </details>
+    <details>
+      <summary>Can I download the whole list?</summary>
+      <p>Yes. The file is <a href="data/ats-index.json">data/ats-index.json</a>, each entry is <code>[platform, company name, board slug]</code> with g = Greenhouse, l = Lever, a = Ashby, s = SmartRecruiters.</p>
+    </details>
+    <details>
+      <summary>Do you store my searches?</summary>
+      <p>No. The page is static, has no analytics and no cookies. Searches run in your browser.</p>
+    </details>
+    <details>
+      <summary>Can I get new job postings from many companies automatically?</summary>
+      <p>Use <a href="https://apify.com/clearstack-data/career-site-jobs-search">Career Site Jobs Search</a> on a schedule with "Only new jobs since last run" enabled, or plug it into n8n, Make or Zapier. Ready-made n8n workflows are in <a href="https://github.com/Wordhalm/clearstack-data-automation-templates">clearstack-data-automation-templates</a>.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Made by <a href="https://apify.com/clearstack-data">ClearStack Data</a>. Company index © 2026 Kalil Bouzigues, MIT License (<a href="DATA-LICENSE-kalil0321-ats-scrapers.txt">license</a>). Not affiliated with Greenhouse, Lever, Ashby or SmartRecruiters.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
