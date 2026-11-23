@@ -22,7 +22,7 @@ Find which applicant tracking system a company hires on and list its open roles 
 
 ## Many companies, every day
 
-This page reads one board at a time. To pull roles from hundreds of boards in one run and keep only those opened since the previous run, use [Career Site Jobs Search](https://apify.com/clearstack-data/career-site-jobs-search) on Apify. Ready-made n8n workflows (daily hiring signals to Slack, and others) are in [clearstack-data-automation-templates](https://github.com/Wordhalm/clearstack-data-automation-templates).
+This page reads one board at a time. To pull roles from hundreds of boards in one run and keep only those opened since the previous run, use [Career Site Jobs Search](https://apify.com/clearstack-data/career-site-jobs-search) on Apify, or query it directly from Claude, Cursor, or VS Code with [`clearstack-data-mcp`](https://github.com/Wordhalm/clearstack-data-mcp) (`npx -y clearstack-data-mcp`). Ready-made n8n workflows (daily hiring signals to Slack, and others) are in [clearstack-data-automation-templates](https://github.com/Wordhalm/clearstack-data-automation-templates).
 
 ## Run locally
 
